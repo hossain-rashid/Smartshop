@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartShop – Online Product Store</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <header class="bg-white sticky top-0 z-50 shadow-md">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-blue-600">SmartShop</h1>
+            <ul id="nav-links" class="hidden md:flex space-x-6 text-lg font-medium">
+                <li><a href="#home" class="text-gray-700 hover:text-blue-600 active-link">Home</a></li>
+                <li><a href="#products" class="text-gray-700 hover:text-blue-600">Products</a></li>
+                <li><a href="#reviews" class="text-gray-700 hover:text-blue-600">Reviews</a></li>
+                <li><a href="#contact" class="text-gray-700 hover:text-blue-600">Contact</a></li>
+            </ul>
+            <button id="open-cart-btn" class="p-2 relative">
+                <i class="fa-solid fa-cart-shopping text-2xl text-gray-700"></i>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4">
+
+        <section id="home" class="mb-12 relative w-full h-96 overflow-hidden rounded-lg shadow-lg">
+            <div id="banner-slider" class="w-full h-full flex transition-transform duration-500 ease-in-out">
+                <img src="./assets/image/image2.webp" class="w-full h-full object-cover flex-shrink-0">
+                <img src="./assets//image/image1.webp" class="w-full h-full object-cover flex-shrink-0">
+                <img src="https://via.placeholder.com/1200x400/DC3545/FFFFFF?text=Flash+Deals" class="w-full h-full object-cover flex-shrink-0">
+            </div>
+            <button id="banner-prev" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/50 p-3 rounded-full hover:bg-white">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button id="banner-next" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/50 p-3 rounded-full hover:bg-white">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </section>
+
+        <section id="products" class="mb-12">
+            <h2 class="text-4xl font-bold text-center mb-8">Our Products</h2>
+
+            <div class="mb-6 p-4 bg-white rounded-lg shadow flex flex-col md:flex-row gap-4">
+                <input type="text" id="search-input" placeholder="Search by product name..." class="flex-grow p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div id="category-filters" class="flex flex-wrap gap-2">
+                    <button class="filter-btn bg-blue-500 text-white px-4 py-2 rounded-lg">All</button>
+                    </div>
+            </div>
+
+            <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="product-loading text-center p-4">Loading Products...</div>
+            </div>
+        </section>
+
+        <section id="reviews" class="mb-12">
+            <h2 class="text-4xl font-bold text-center mb-8">Customer Reviews</h2>
+            <div class="relative w-full overflow-hidden p-4">
+                <div id="review-slider" class="flex transition-transform duration-500 ease-in-out">
+                    </div>
+                <button id="review-prev" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white/50 p-3 rounded-full shadow-lg">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button id="review-next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white/50 p-3 rounded-full shadow-lg">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="contact" class="mb-12 p-8 bg-white rounded-lg shadow-lg">
+            <h2 class="text-4xl font-bold text-center mb-8">Contact Us</h2>
+            <form id="contact-form" class="max-w-2xl mx-auto space-y-4">
+                <div>
+                    <label for="name" class="block text-lg font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" required class="mt-1 block w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="email" class="block text-lg font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" required class="mt-1 block w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="message" class="block text-lg font-medium text-gray-700">Message</label>
+                    <textarea id="message" rows="4" required class="mt-1 block w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-blue-700">
+                    Send Message
+                </button>
+            </form>
+            <div id="form-message" class="mt-4 text-center text-lg"></div>
+        </section>
+
+    </main>
+
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 lg:w-1/3 bg-white shadow-2xl p-6 transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-3xl font-bold">Your Cart</h2>
+            <button id="close-cart-btn" class="p-2">
+                <i class="fa-solid fa-xmark text-3xl text-gray-600"></i>
+            </button>
+        </div>
+
+        <div class="mb-4 p-4 bg-blue-50 rounded-lg">
+            <h3 class="text-lg font-semibold">Your Balance:</h3>
+            <span id="user-balance" class="text-3xl font-bold text-green-600">1000.00</span> BDT
+            <button id="add-money-btn" class="w-full bg-green-500 text-white font-bold px-4 py-2 rounded text-sm mt-3 hover:bg-green-600">
+                Add 1000 BDT
+            </button>
+        </div>
+
+        <div id="cart-items-container" class="mb-4 divide-y divide-gray-200">
+            <p id="cart-empty-msg" class="text-gray-500">Your cart is empty.</p>
+        </div>
+        
+        <div class="border-t pt-4 space-y-2">
+            <div class="flex justify-between text-lg">
+                <span>Subtotal:</span>
+                <span id="subtotal">0.00 BDT</span>
+            </div>
+            <div class="flex justify-between text-lg">
+                <span>Delivery Charge:</span>
+                <span id="delivery-charge">50.00 BDT</span>
+            </div>
+            <div class="flex justify-between text-lg">
+                <span>Shipping Cost:</span>
+                <span id="shipping-cost">10.00 BDT</span>
+            </div>
+            
+            <div class="flex items-center space-x-2 pt-2">
+                <input type="text" id="coupon-input" placeholder="Coupon: SMART10" class="border p-2 w-full rounded-lg">
+                <button id="apply-coupon-btn" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Apply</button>
+            </div>
+            <div class="flex justify-between text-lg text-red-500">
+                <span>Discount:</span>
+                <span id="discount">- 0.00 BDT</span>
+            </div>
+            <hr class="my-2">
+            <div class="flex justify-between font-bold text-2xl">
+                <span>Total:</span>
+                <span id="final-total">60.00 BDT</span>
+            </div>
+        </div>
+        
+        <p id="balance-warning" class="text-red-600 font-bold text-lg mt-4 text-center hidden">
+            <i class="fa-solid fa-triangle-exclamation"></i> Total exceeds your balance!
+        </p>
+
+        <button id="checkout-btn" class="w-full bg-blue-600 text-white font-bold py-3 mt-4 rounded-lg text-xl hover:bg-blue-700">
+            Checkout
+        </button>
+    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+
+    <footer class="bg-gray-800 text-gray-300 p-10">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-2xl font-bold text-white mb-4">SmartShop</h3>
+                <p>Your one-stop shop for everything you need. Quality products at unbeatable prices.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="#home" class="hover:text-white">Home</a></li>
+                    <li><a href="#products" class="hover:text-white">Products</a></li>
+                    <li><a href="#reviews" class="hover:text-white">Reviews</a></li>
+                    <li><a href="#contact" class="hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Contact Us</h4>
+                <p>Chattogram, Bangladesh</p>
+                <p>Email: info@smartshop.com</p>
+                <p>Phone: +880 123 456789</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
+                <div class="flex space-x-4 text-2xl">
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8 border-t border-gray-700 pt-6">
+            &copy; 2025 SmartShop. All rights reserved.
+        </div>
+    </footer>
+
+    <button id="back-to-top-btn" class="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 hidden">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+
+    <script src="./js/api.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/cart.js"></script>
+    <script src="./js/balance.js"></script>
+    <script src="./js/features.js"></script>
+    <script src="./js/main.js"></script> </body>
+</html>
